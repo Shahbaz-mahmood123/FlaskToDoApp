@@ -1,7 +1,7 @@
 from flasktodo.models import User, Lists
 from flask import Flask, render_template, url_for, flash, redirect
 from flasktodo.forms import RegistrationForm, LoginForm
-from flasktodo import app
+from flasktodo import app, db,  bcrypt
 
 posts = [
     {
@@ -44,6 +44,10 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+        hashed_password= bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username = form.username.data, email = form.email.data, password = hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Account created, please log in', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
