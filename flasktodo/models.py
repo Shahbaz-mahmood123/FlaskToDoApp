@@ -27,5 +27,8 @@ class Lists(db.Model):
     content = db.Column(db.Text , nullable= False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable =False)
 
+    def get_id(self):
+        return (self.user_id)
+
 # class Tasks(db.Model):
 #     task_id = db.Column(db.Integer, primary_key = True)
