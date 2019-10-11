@@ -2,17 +2,14 @@
 
 {% block content %} 
 <h1>Home</h1>
-{% for lists in lists%}
 <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2" href="#">{{ lists.user_id }}</a>
             <small class="text-muted">{{ lists.date_created.strftime('%Y-%m-%d') }}</small>
           </div>
-          <h2><a class="article-title" href="{{ url_for('list', list_id= lists.listid) }}">{{ lists.title }}</a></h2>
+          <h2 class="article-title">{{ lists.title }}</h2>
           <p class="article-content">{{ lists.content }}</p>
         </div>
       </article>
-{%endfor%}
 {% endblock %}
-<!-- <img class="rounded-circle article-img" src="{{url_for ('static', filename ='profile_pcitures/' + list.user.image_file)}}"> -->  

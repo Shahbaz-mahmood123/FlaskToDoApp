@@ -6,7 +6,7 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">New content </legend>
+            <legend class="border-bottom mb-4">{{ legend }} </legend>
             <div class="form-group">
                 {{ form.title.label(class="form-control-label") }}
                 {% if form.title.errors %}
@@ -39,10 +39,6 @@
         </div>
     </form>
 </div>
-<div class="border-top pt-3">
-    <small class="text-muted">
-        Don't have an account, sign up <a class="ml-2" href="{{ url_for('register') }}">Sign In</a>
-    </small>
-</div>
+
 
 {% endblock %}

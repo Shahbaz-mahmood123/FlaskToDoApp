@@ -95,4 +95,30 @@ def new_list():
         db.session.commit()
         flash('New list has been created', 'success')
         return redirect(url_for('home'))
-    return render_template('create_list.html', title ='New List', form = form)
+    return render_template('create_list.html', title ='New List', form = form,  legend= 'New Post')
+
+
+@app.route("/list/<int:list_id>", methods=['GET', 'POST'])
+@login_required
+def list(list_id):
+    lists =Lists.query.get_or_404(list_id)
+    return render_template('list.html', title=lists.title, lists=lists)
+
+@app.route("/list/<int:list_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_list(list_id):
+    lists =Lists.query.get(list_id)
+    if lists.user_id != current_user.get_id():
+        abort(403)
+    form = ListForm()
+    if form.validate_on_submit:
+        list.title = form.title.data
+        list.content = form.content.data
+        db.session.commit()
+        flash('Your list has been updated')
+        return redirect(url_for('list', list_id = list_id))
+        ##issue with this route  not working properly, redirectig to list page without showing the update form
+    # elif request.method == 'GET':
+    #     form.title.data = list.title
+    #     form.content.data=list.content  
+    return render_template('create_list.html', title ='Update List', form = form, legend= 'Update Post')
