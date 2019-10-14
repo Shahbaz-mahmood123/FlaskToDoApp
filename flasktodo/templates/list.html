@@ -7,6 +7,12 @@
           <div class="article-metadata">
             <a class="mr-2" href="#">{{ lists.user_id }}</a>
             <small class="text-muted">{{ lists.date_created.strftime('%Y-%m-%d') }}</small>
+            {% if lists.author == current_user %}
+            <div>
+              <a class="btn btn-secondary btn-sm m-1"  href="{{ url_for('update_list, list_id =list.id') }}"></a>
+              <button type="button" class="btn btn-danger btn-sm m-1"> Delete</button>
+            </div>
+            {% endif %}
           </div>
           <h2 class="article-title">{{ lists.title }}</h2>
           <p class="article-content">{{ lists.content }}</p>
