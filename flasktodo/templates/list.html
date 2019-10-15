@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 
-{% block content %} 
+{% block content %}
 <h1>Home</h1>
 <article class="media content-section">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-2" href="#">{{ lists.user_id }}</a>
-            <small class="text-muted">{{ lists.date_created.strftime('%Y-%m-%d') }}</small>
-            {% if lists.author == current_user %}
-            <div>
-              <a class="btn btn-secondary btn-sm m-1"  href="{{ url_for('update_list, list_id =list.id') }}"></a>
-              <button type="button" class="btn btn-danger btn-sm m-1"> Delete</button>
-            </div>
-            {% endif %}
-          </div>
-          <h2 class="article-title">{{ lists.title }}</h2>
-          <p class="article-content">{{ lists.content }}</p>
-        </div>
-      </article>
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ lists.user_id }}</a>
+      <small class="text-muted">{{ lists.date_created.strftime('%Y-%m-%d') }}</small>
+
+    </div>
+    <h2 class="article-title">{{ lists.title }}</h2>
+    <p class="article-content">{{ lists.content }}</p>
+  </div>
+</article>
+{% if lists.user_id == current_user.get_id() %}
+<div>
+  <form action="{{ url_for('delete_list', list_id= lists.listid) }}" method="POST">
+    <input class="btn btn-danger btn-sm m-1" type="submit" value="Delete">
+    <a class="btn btn-secondary btn-sm m-1" href="{{ url_for('update_list', list_id= lists.listid) }}">Update</a>
+  </form>
+</div>
+{% endif %}
 {% endblock %}
