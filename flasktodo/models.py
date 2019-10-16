@@ -13,7 +13,9 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20),  nullable= False, default= 'default.jpg')
     password = db.Column(db.String(60), nullable= False, default= datetime.utcnow)
     lists = db.relationship('Lists', backref='ListAuthor', lazy = True)
-
+    
+    #need to change models so user_id is just id and the same for all other primary keys in table as to call userid in routes the column should be ID. 
+    #Also helps in stopping repeating calling user.user_id etc
     def get_id(self):
            return (self.user_id)
 
@@ -30,5 +32,11 @@ class Lists(db.Model):
     def get_id(self):
         return (self.user_id)
 
-# class Tasks(db.Model):
-#     task_id = db.Column(db.Integer, primary_key = True)
+class Tasks(db.Model):
+    task_id = db.Column(db.Integer, primary_key = True)
+    date_created  = db.Column(db.DateTime, nullable=False, default = datetime.utcnow)
+    content = db.Column(db.Text , nullable= False)
+    status = db.Column(db.Text, nullable= False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable =False)
+    listid = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable =False)
+    

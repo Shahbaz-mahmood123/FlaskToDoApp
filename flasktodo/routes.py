@@ -7,11 +7,13 @@ import secrets
 import os
 
 
-
+#pagination is not working, getting error that the pagination orbject is not iterable?
 @app.route('/')
 @app.route('/home')
 def home():
-    lists= Lists.query.all()
+    page = request.args.get('page', 1, type =int)
+    lists= Lists.query.paginate( page=page, per_page=2)
+    #lists= Lists.query.all()
     return render_template('home.html', lists = lists)
 
 
