@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import  FileField, FileAllowed
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
-from wtforms.validators import Length, DataRequired, Email, EqualTo, ValidationError
 from flasktodo.models import User
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -56,13 +57,3 @@ class AccountUpdate(FlaskForm):
             user = User.query.filter_by(email =email.data).first()
             if user:
                 raise ValidationError('Email is taken, please try another one')
-
-    
-    #firstname= StringField ('First Name', validators=[DataRequired()])
-
-    #surname = StringField('Surname', validators=[DataRequired])
-
-class ListForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content= TextAreaField('List Details', validators=[DataRequired()])
-    submit = SubmitField('Create new list')

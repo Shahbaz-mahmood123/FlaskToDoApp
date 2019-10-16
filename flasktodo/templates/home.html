@@ -9,7 +9,7 @@
             <a class="mr-2" href="#">{{ lists.user_id }}</a>
             <small class="text-muted">{{ lists.date_created.strftime('%Y-%m-%d') }}</small>
           </div>
-          <h2><a class="article-title" href="{{ url_for('list', list_id= lists.listid) }}">{{ lists.title }}</a></h2>
+          <h2><a class="article-title" href="{{ url_for('lists.list', list_id= lists.listid) }}">{{ lists.title }}</a></h2>
           <p class="article-content">{{ lists.content }}</p>
         </div>
       </article>
@@ -18,9 +18,9 @@
 {% for page_num in lists.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
 {% if page_num %}
   {% if lists.page == page_num %}
-    <a class="btn btn-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+    <a class="btn btn-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
   {% else %}
-    <a class="btn btn-outline-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+    <a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
   {% endif %}
 {% else %}
   ...

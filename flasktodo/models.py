@@ -36,6 +36,7 @@ class Tasks(db.Model):
     task_id = db.Column(db.Integer, primary_key = True)
     date_created  = db.Column(db.DateTime, nullable=False, default = datetime.utcnow)
     content = db.Column(db.Text , nullable= False)
+    Action_date = db.Column(db.DateTime, nullable=False)
     status = db.Column(db.Text, nullable= False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable =False)
     listid = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable =False)

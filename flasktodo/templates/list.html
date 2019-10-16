@@ -15,10 +15,16 @@
 </article>
 {% if lists.user_id == current_user.get_id() %}
 <div>
-  <form action="{{ url_for('delete_list', list_id= lists.listid) }}" method="POST">
+  <form action="{{ url_for('lists.delete_list', list_id= lists.listid) }}" method="POST">
     <input class="btn btn-danger btn-sm m-1" type="submit" value="Delete">
-    <a class="btn btn-secondary btn-sm m-1" href="{{ url_for('update_list', list_id= lists.listid) }}">Update</a>
+    <a class="btn btn-secondary btn-sm m-1" href="{{ url_for('lists.update_list', list_id= lists.listid) }}">Update</a>
   </form>
 </div>
 {% endif %}
+
+<div class="container">
+<div class="box1">some content</div>
+<div class="box2">some content</div>
+<div class="box3">some content</div>
+</div>
 {% endblock %}
