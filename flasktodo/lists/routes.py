@@ -54,3 +54,8 @@ def delete_list(list_id):
     db.session.commit()
     flash('List has been deleted')
     return redirect(url_for('main.home'))
+
+
+@lists.route("/lists1", methods=['GET', 'POST'])
+def lists1():
+    return render_template('lists1.html')
