@@ -43,7 +43,7 @@ def update_list(list_id):
     elif request.method == 'GET':
         form.title.data = lists.title
         form.content.data=lists.content  
-    return render_template('create_list.html', title ='Update List', form = form, legend= 'Update Post' )
+    return render_template('create_list.html', title ='Update List', form = form, legend= 'Update List' )
 
 
 @lists.route("/list/<int:list_id>/delete", methods=['POST'])
