@@ -17,7 +17,7 @@ def new_list():
         db.session.commit()
         flash('New list has been created', 'success')
         return redirect(url_for('main.home'))
-    return render_template('create_list.html', title ='New List', form = form,  legend= 'New Post')
+    return render_template('create_list.html', title ='New List', form = form,  legend= 'New List')
 
 
 @lists.route("/list/<int:list_id>", methods=['GET', 'POST'])
